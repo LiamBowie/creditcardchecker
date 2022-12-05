@@ -1,4 +1,3 @@
-console.log("Hello")
 // All valid credit card numbers
 const valid1 = [4, 5, 3, 9, 6, 7, 7, 9, 0, 8, 0, 1, 6, 8, 0, 8];
 const valid2 = [5, 5, 3, 5, 7, 6, 6, 7, 6, 8, 7, 5, 1, 4, 3, 9];
@@ -26,52 +25,37 @@ const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, inval
 
 // Add your functions below:
 const validateCred = arr => { 
-  // checkDigit is the digit farthest right in the Array
-  let checkDigit = arr[arr.length - 1];
-  // Flag variable to indicate every other digit 
-  let otherDigit = false;
-  // Sum of all the digits
-  let sum = 0;
+    // Local variables 
+    const checkDigit = arr[arr.length - 1];
+    let otherDigit = false;
+    let sum = 0;
 
-  // Iterate over the array from right to left (reverse)
-  for (let i = arr.length-1; i >= 0; i--) { 
-    // Check if we are on every other digit 
-    if(otherDigit) { 
-      let debugStr = "Doubled: ";
-      // Every other digit is doubled and if the result has double digits then 9 is subtracted 
-      let doubled = arr[i] *= 2;
+    // Iterate over the array from right to left (reverse)
+    for (let i = arr.length-1; i >= 0; i--) { 
 
-      if(doubled > 9) { 
-        doubled -= 9;
-        debugStr += doubled + " (-9)";
-      }
-      // else debugStr += doubled;
+        // Check if we are on every other digit 
+        if(otherDigit) { 
+            // Every other digit is doubled and if the result has double digits then 9 is subtracted 
+            let doubled = arr[i] *= 2;
 
-      sum += doubled;
-      // Update the otherDigit flag
-      otherDigit = false;
-
-      // console.log(debugStr);
+            if(doubled > 9) { 
+                doubled -= 9;
+            }
+            sum += doubled;
+            otherDigit = false;
+        }
+        else { 
+            sum += arr[i];
+            otherDigit = true 
+        }
+    }
+    // Check that the sum modulo 10 = 0
+    if (sum % 10 === 0) { 
+        return true;
     }
     else { 
-
-      // console.log("Normal : " + arr[i]);
-
-      sum += arr[i];
-
-      // Update the otherDigit flag
-      otherDigit = true 
+        return false;
     }
-  }
-  // console.log("Sum    : " + sum);
-
-  // Check that the sum modulo 10 = 0
-  if (sum % 10 === 0) { 
-    return true;
-  }
-  else { 
-    return false;
-  }
 }
 
 

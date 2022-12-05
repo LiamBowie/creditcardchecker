@@ -21,12 +21,11 @@ const mystery5 = [4, 9, 1, 3, 5, 4, 0, 4, 6, 3, 0, 7, 2, 5, 2, 3];
 
 // An array of all the arrays above
 const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, invalid3, invalid4, invalid5, mystery1, mystery2, mystery3, mystery4, mystery5];
-const invalidCards = [invalid5, valid3];
+const mystery = [mystery1, mystery2, mystery3, mystery4, mystery5];
 
 // Add your functions below:
 const validateCred = arr => { 
     // Local variables 
-    const checkDigit = arr[arr.length - 1];
     let otherDigit = false;
     let sum = 0;
 
@@ -36,7 +35,7 @@ const validateCred = arr => {
         // Check if we are on every other digit 
         if(otherDigit) { 
             // Every other digit is doubled and if the result has double digits then 9 is subtracted 
-            let doubled = arr[i] *= 2;
+            let doubled = arr[i] * 2;
 
             if(doubled > 9) { 
                 doubled -= 9;
@@ -46,7 +45,7 @@ const validateCred = arr => {
         }
         else { 
             sum += arr[i];
-            otherDigit = true 
+            otherDigit = true;
         }
     }
     // Check that the sum modulo 10 = 0
@@ -70,6 +69,36 @@ const findInvalidCards = arr => {
     return invalidCards;
 }
 
+const idInvalidCompanies = invalidCards => { 
+    let companies = [];
+    invalidCards.forEach(card => {
 
+        switch (card[0]) { 
+            case 3: 
+                if (!companies.includes('Amex')) {
+                    companies.push('Amex');
+                }
+                break;
+            case 4: 
+                if (!companies.includes('Visa')) {
+                    companies.push('Visa');
+                }
+                break;
+            case 5: 
+                if (!companies.includes('Mastercard')) { 
+                    companies.push('Mastercard');
+                }
+                break;
+            case 6: 
+                if (!companies.includes('Discover')) {
+                    companies.push('Discover');
+                }
+                break;
+            default: 
+                console.log('Company not found');
+        }
+    });
+    return companies;
+}
 
-console.log(findInvalidCards(invalidCards));
+console.log(idInvalidCompanies(findInvalidCards(batch)));

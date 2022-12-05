@@ -21,7 +21,7 @@ const mystery5 = [4, 9, 1, 3, 5, 4, 0, 4, 6, 3, 0, 7, 2, 5, 2, 3];
 
 // An array of all the arrays above
 const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, invalid3, invalid4, invalid5, mystery1, mystery2, mystery3, mystery4, mystery5];
-
+const invalidCards = [invalid5, valid3];
 
 // Add your functions below:
 const validateCred = arr => { 
@@ -58,8 +58,18 @@ const validateCred = arr => {
     }
 }
 
+const findInvalidCards = arr => { 
+    let invalidCards = [];
+
+    arr.forEach(card => {
+        if (validateCred(card) === false){
+            invalidCards.push(card);
+        }
+    });
+
+    return invalidCards;
+}
 
 
-console.log(validateCred(valid4));
 
-
+console.log(findInvalidCards(invalidCards));
